@@ -4,20 +4,26 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .models import Service, Review, Profile
 from .forms import UserUpdateForm, ProfileUpdateForm
+from django.db.models import Q
 
 # === 1. HOME (Wajib ada biar gak error 'views has no attribute index') ===
 def index(request):
     banners = Service.objects.filter(is_banner=True)[:3]
     category = request.GET.get('cat')
+    search_query = request.GET.get('q')
     services = Service.objects.all()
     
     if category:
         services = services.filter(category=category)
+        
+    if search_query:
+        services = services.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
 
     return render(request, 'index.html', {
         'services': services,
         'banners': banners,
-        'selected_cat': category
+        'selected_cat': category,
+        'search_query': search_query
     })
 
 # === 2. DETAIL SERVICE ===

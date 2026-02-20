@@ -4,24 +4,28 @@
     <div class="row justify-content-center">
         <div class="col-md-5" data-aos="zoom-in">
             <div class="glass-card p-5 border border-secondary border-opacity-25 rounded-4">
-                <h2 class="text-center fw-bold text-white mb-4">Login Member</h2>
-                
+                <h2 class="text-center fw-bold text-theme-main mb-4">Login Member</h2>
+
                 <form method="post">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label class="text-secondary mb-1">Username</label>
-                        <input type="text" name="username" class="form-control bg-dark border-secondary text-white shadow-none" required>
+                        <input type="text" name="username"
+                            class="form-control bg-theme-glass border-secondary text-theme-main shadow-none" required>
                     </div>
                     <div class="mb-4">
                         <label class="text-secondary mb-1">Password</label>
-                        <input type="password" name="password" class="form-control bg-dark border-secondary text-white shadow-none" required>
+                        <input type="password" name="password"
+                            class="form-control bg-theme-glass border-secondary text-theme-main shadow-none" required>
                     </div>
-                    
-                    <button type="submit" class="btn btn-primary w-100 py-2 fw-bold rounded-pill">Masuk Sekarang</button>
+
+                    <button type="submit" class="btn btn-primary w-100 py-2 fw-bold rounded-pill">Masuk
+                        Sekarang</button>
                 </form>
-                
+
                 <div class="text-center mt-4">
-                    <p class="text-secondary small">Belum punya akun? <a href="{% url 'register' %}" class="text-primary text-decoration-none">Daftar disini</a></p>
+                    <p class="text-secondary small">Belum punya akun? <a href="{% url 'register' %}"
+                            class="text-primary text-decoration-none">Daftar disini</a></p>
                 </div>
             </div>
         </div>

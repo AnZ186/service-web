@@ -1,0 +1,530 @@
+/* =========================================================================
+   ANZ DIGITAL - ADVANCED STYLING ENGINE (NEON CYBERPUNK & DEEP SPACE)
+   ========================================================================= */
+
+:root {
+    /* Deep Space Dark Theme */
+    --bg-body: #050510;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+
+    /* Neon Cyberpunk Accents */
+    --accent-neon-blue: #0ea5e9;
+    --accent-neon-purple: #8b5cf6;
+    --accent-glow: 0 0 20px rgba(139, 92, 246, 0.6), 0 0 40px rgba(14, 165, 233, 0.4);
+
+    /* Glassmorphism Advanced */
+    --glass-bg: rgba(15, 20, 35, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-hover: rgba(139, 92, 246, 0.5);
+    --card-bg: rgba(15, 20, 35, 0.6);
+}
+
+[data-bs-theme="light"] {
+    --bg-body: #f8fafc;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --glass-border-hover: rgba(139, 92, 246, 0.8);
+    --card-bg: rgba(255, 255, 255, 0.9);
+}
+
+/* =========================================================================
+   BASE AESTHETICS & CUSTOM CURSOR
+   ========================================================================= */
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    transition: background-color 0.5s ease;
+    overflow-x: hidden;
+    cursor: none;
+    /* Hide default for custom cursor */
+}
+
+/* Custom Cursor Elements */
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-neon-blue);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px var(--accent-neon-blue);
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(139, 92, 246, 0.5);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+/* Hover state for links/interactives */
+a:hover~.cursor-outline,
+button:hover~.cursor-outline,
+.hover-card:hover~.cursor-outline {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(14, 165, 233, 0.1);
+    border-color: var(--accent-neon-blue);
+}
+
+/* Dynamic Animated Background */
+.bg-mesh {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.15), transparent 25%);
+    filter: blur(60px);
+    opacity: 0.8;
+    animation: pulseMesh 10s infinite alternate;
+}
+
+@keyframes pulseMesh {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+/* =========================================================================
+   TYPOGRAPHY & GRADIENTS
+   ========================================================================= */
+h1,
+.display-1,
+.display-3 {
+    font-weight: 900 !important;
+    letter-spacing: -1px;
+}
+
+.text-gradient {
+    background: linear-gradient(to right, var(--accent-neon-blue), var(--accent-neon-purple), var(--accent-neon-blue));
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* Typewriter Effect Container */
+.typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: .15em solid var(--accent-neon-blue);
+    animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+
+    to {
+        width: 100%
+    }
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: var(--accent-neon-blue);
+    }
+}
+
+/* =========================================================================
+   ADVANCED GLASSMORPHISM & COMPONENTS
+   ========================================================================= */
+.navbar-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--glass-border);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.navbar-scrolled {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    background: rgba(5, 5, 16, 0.85);
+    /* Darker on scroll */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+    /* Neon border under nav */
+}
+
+/* Mac OS Style Search Bar */
+.search-glow-wrap {
+    position: relative;
+}
+
+.search-glow-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(90deg, var(--accent-neon-blue), var(--accent-neon-purple));
+    border-radius: 50px;
+    z-index: -1;
+    filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.search-glow-wrap:hover::before,
+.search-glow-wrap:focus-within::before {
+    opacity: 0.8;
+}
+
+.search-input-mac {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--glass-border);
+    color: white;
+    border-radius: 50px;
+    padding: 15px 25px 15px 50px;
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.search-input-mac:focus {
+    background: rgba(0, 0, 0, 0.8);
+    outline: none;
+    box-shadow: none;
+    border-color: transparent;
+    color: white;
+}
+
+/* Filter Pills */
+.filter-pill {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.filter-pill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-neon-blue), var(--accent-neon-purple));
+    z-index: -1;
+    transition: width 0.4s ease;
+}
+
+.filter-pill:hover::before,
+.filter-pill.active::before {
+    width: 100%;
+}
+
+.filter-pill:hover,
+.filter-pill.active {
+    color: white;
+    border-color: transparent;
+    box-shadow: var(--accent-glow);
+    transform: translateY(-2px);
+}
+
+/* =========================================================================
+   3D TILT SERVICE CARDS
+   ========================================================================= */
+.project-tilt-card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+    transform-style: preserve-3d;
+    transition: transform 0.1s;
+    /* Controlled by JS Vanilla-Tilt */
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.project-tilt-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%, rgba(139, 92, 246, 0.3) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.project-tilt-card:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), var(--accent-glow);
+}
+
+/* Image inside Card pulling 3D */
+.card-img-wrap {
+    height: 220px;
+    overflow: hidden;
+    border-radius: 20px;
+    margin: 15px;
+    position: relative;
+    transform: translateZ(30px);
+    /* 3D pop out */
+}
+
+.card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.project-tilt-card:hover .card-img-wrap img {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+.card-content-3d {
+    padding: 15px 25px 25px;
+    transform: translateZ(40px);
+    /* Text pops out further */
+}
+
+.price-tag {
+    font-family: var(--font-heading);
+    background: linear-gradient(90deg, #10b981, #34d399);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    font-size: 1.4rem;
+}
+
+/* =========================================================================
+   BUTTONS & MISC
+   ========================================================================= */
+.btn-neon {
+    background: transparent;
+    color: white;
+    border: 1px solid var(--accent-neon-blue);
+    border-radius: 50px;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    padding: 10px 25px;
+    overflow: hidden;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.2) inset;
+}
+
+.btn-neon::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: var(--accent-neon-blue);
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.btn-neon:hover::after {
+    width: 100%;
+}
+
+.btn-neon:hover {
+    box-shadow: 0 0 20px var(--accent-neon-blue);
+    border-color: transparent;
+}
+
+/* Smooth Reveal Classes for Intersection Observer */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Theme Toggle Bounce */
+.theme-toggle-bounce {
+    transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    cursor: pointer;
+}
+
+.theme-toggle-bounce:hover {
+    transform: scale(1.2) rotate(15deg);
+    color: #fbbf24 !important;
+    text-shadow: 0 0 15px rgba(251, 191, 36, 0.8);
+}
+
+/* Preloader Cinematic */
+#preloader {
+    background-color: var(--bg-body);
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.8s ease;
+}
+
+.neon-brand-loader {
+    font-size: 4rem;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    color: white;
+    animation: neonFlicker 1.5s infinite alternate;
+}
+
+@keyframes neonFlicker {
+
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--accent-neon-blue), 0 0 40px var(--accent-neon-blue);
+        opacity: 1;
+    }
+
+    20%,
+    24%,
+    55% {
+        text-shadow: none;
+        opacity: 0.5;
+    }
+}
+
+/* =========================================================================
+   FAQ SECTION (Neo Cyberpunk)
+   ========================================================================= */
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq-item {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.faq-item.active {
+    border-color: var(--accent-neon-blue);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-align: left;
+    cursor: none;
+    /* override default cursor */
+}
+
+.faq-question:hover {
+    color: var(--accent-neon-blue);
+}
+
+.faq-icon {
+    font-size: 1.2rem;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    color: var(--accent-neon-blue);
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.faq-answer-inner {
+    overflow: hidden;
+}
+
+.faq-answer-inner p {
+    margin: 0;
+    padding: 0 25px 20px 25px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: all 0.4s ease 0.1s;
+}
+
+.faq-item.active .faq-answer {
+    grid-template-rows: 1fr;
+}
+
+.faq-item.active .faq-answer-inner p {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Theme Overrides */
+.text-theme-main {
+    color: var(--text-main) !important;
+}
+
+.bg-theme-glass {
+    background: var(--glass-bg) !important;
+}

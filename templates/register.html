@@ -2,38 +2,44 @@
 
 {% block content %}
 <div class="d-flex align-items-center justify-content-center min-vh-100 py-5 position-relative">
-    
-    <div class="position-absolute top-50 start-50 translate-middle w-75 h-75 bg-gradient opacity-10 rounded-circle blur-xxl" style="background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);"></div>
+
+    <div class="position-absolute top-50 start-50 translate-middle w-75 h-75 bg-gradient opacity-10 rounded-circle blur-xxl"
+        style="background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);"></div>
 
     <div class="container position-relative z-2">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-5">
-                
+
                 <div class="glass-card p-5 animate-zoom-in">
                     <div class="text-center mb-4">
-                        <h2 class="fw-bold text-white">Buat Akun Baru</h2>
+                        <h2 class="fw-bold text-theme-main">Buat Akun Baru</h2>
                         <p class="text-secondary small">Bergabunglah dengan ribuan member lainnya.</p>
                     </div>
 
                     <form method="post" class="d-flex flex-column gap-3">
                         {% csrf_token %}
-                        
+
                         {% for field in form %}
-                        <div class="form-group animate-slide-up" style="animation-delay: {{ forloop.counter|add:'1' }}00ms;">
+                        <div class="form-group animate-slide-up"
+                            style="animation-delay: {{ forloop.counter|add:'1' }}00ms;">
                             <label class="text-secondary small ms-1 mb-1">{{ field.label }}</label>
                             <div class="glass-input-wrapper">
-                                {{ field }} 
+                                {{ field }}
                             </div>
                             {% if field.help_text %}
-                            <small class="text-muted d-block mt-1" style="font-size: 0.7rem;">{{ field.help_text|safe }}</small>
+                            <small class="text-muted d-block mt-1" style="font-size: 0.7rem;">{{ field.help_text|safe
+                                }}</small>
                             {% endif %}
                             {% for error in field.errors %}
-                            <small class="text-danger d-block mt-1"><i class="bi bi-exclamation-circle me-1"></i>{{ error }}</small>
+                            <small class="text-danger d-block mt-1"><i class="bi bi-exclamation-circle me-1"></i>{{
+                                error }}</small>
                             {% endfor %}
                         </div>
                         {% endfor %}
 
-                        <button type="submit" class="btn btn-gradient w-100 py-2 rounded-pill fw-bold mt-4 shadow-lg animate-slide-up" style="animation-delay: 600ms;">
+                        <button type="submit"
+                            class="btn btn-gradient w-100 py-2 rounded-pill fw-bold mt-4 shadow-lg animate-slide-up"
+                            style="animation-delay: 600ms;">
                             DAFTAR SEKARANG
                         </button>
                     </form>
@@ -51,30 +57,62 @@
 
 <style>
     /* Styling Form Django Otomatis */
-    input[type="text"], input[type="password"], input[type="email"] {
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
         width: 100%;
         padding: 10px 15px;
         background: rgba(0, 0, 0, 0.3);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 10px;
-        color: white;
+        color: var(--text-main);
         transition: 0.3s;
     }
+
     input:focus {
         outline: none;
         border-color: #8b5cf6;
         background: rgba(0, 0, 0, 0.5);
         box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
     }
-    ul { list-style: none; padding: 0; margin: 0; color: #94a3b8; font-size: 0.8rem; }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        color: #94a3b8;
+        font-size: 0.8rem;
+    }
 
     /* Animations */
-    .animate-zoom-in { animation: zoomIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; transform: scale(0.9); }
-    .animate-slide-up { animation: slideUp 0.5s ease-out forwards; opacity: 0; transform: translateY(20px); }
-    
-    @keyframes zoomIn { to { opacity: 1; transform: scale(1); } }
-    @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
-    
-    .blur-xxl { filter: blur(100px); }
+    .animate-zoom-in {
+        animation: zoomIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    .animate-slide-up {
+        animation: slideUp 0.5s ease-out forwards;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    @keyframes zoomIn {
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes slideUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .blur-xxl {
+        filter: blur(100px);
+    }
 </style>
 {% endblock %}
