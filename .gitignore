@@ -1,0 +1,17 @@
+# python
+__pycache__/
+*.pyc
+
+# database
+db.sqlite3
+
+# env
+.env
+venv/
+.env.*
+
+# django
+media/
+
+# misc
+*.log

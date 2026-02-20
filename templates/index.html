@@ -1,0 +1,217 @@
+{% extends 'base.html' %} 
+{% load humanize %} 
+
+{% block content %}
+<div class="container">
+    
+    {% if banners %}
+    <div
+        id="heroCarousel"
+        class="carousel slide carousel-fade mb-5 mt-4 shadow-lg" 
+        data-bs-ride="carousel"
+        data-aos="zoom-in" 
+        data-aos-duration="1200"
+        style="
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        "
+    >
+        <div class="carousel-indicators">
+            {% for banner in banners %}
+            <button
+                type="button"
+                data-bs-target="#heroCarousel"
+                data-bs-slide-to="{{ forloop.counter0 }}"
+                class="{% if forloop.first %}active{% endif %}"
+                aria-current="true"
+            ></button>
+            {% endfor %}
+        </div>
+
+        <div class="carousel-inner">
+            {% for banner in banners %}
+            <div
+                class="carousel-item {% if forloop.first %}active{% endif %}"
+                data-bs-interval="5000"
+            >
+                <div class="position-relative" style="height: 450px">
+                    {% if banner.image %}
+                    <img
+                        src="{{ banner.image.url }}"
+                        class="d-block w-100 h-100 object-fit-cover"
+                        alt="{{ banner.title }}"
+                        style="filter: brightness(0.4)"
+                    />
+                    {% else %}
+                    <div class="w-100 h-100 bg-secondary d-flex align-items-center justify-content-center">
+                        <i class="bi bi-image text-white display-1 opacity-25"></i>
+                    </div>
+                    {% endif %}
+
+                    <div
+                        class="carousel-caption d-none d-md-block text-start p-5"
+                        style="bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);"
+                    >
+                        <span class="badge bg-primary mb-2 animate-up delay-1">{{ banner.get_category_display }}</span>
+                        <h2 class="display-4 fw-bold text-white animate-up delay-2">
+                            {{ banner.title }}
+                        </h2>
+                        <p class="lead text-light opacity-75 animate-up delay-3">
+                            {{ banner.description|truncatewords:15 }}
+                        </p>
+                        <a
+                            href="{% url 'service_detail' banner.pk %}"
+                            class="btn btn-outline-light rounded-pill px-4 mt-2 animate-up delay-4"
+                        >
+                            Lihat Detail <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="carousel-caption d-md-none text-center pb-4">
+                        <span class="badge bg-primary mb-2">{{ banner.get_category_display }}</span>
+                        <h5 class="fw-bold">{{ banner.title }}</h5>
+                        <a href="{% url 'service_detail' banner.pk %}" class="btn btn-sm btn-light rounded-pill px-3 mt-1">Cek Sekarang</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+    {% endif %}
+
+    <div class="text-center py-5" data-aos="fade-up">
+        <span
+            class="badge rounded-pill bg-gradient text-white px-3 py-2 mb-3 shadow"
+            style="background: linear-gradient(45deg, #3b82f6, #8b5cf6); animation: float 3s ease-in-out infinite;"
+        >
+            🚀 Solusi Digital Terpercaya
+        </span>
+        <h1 class="display-3 fw-bold mb-3 ls-tight">
+            Upgrade Digital<br /><span
+                class="text-transparent bg-clip-text"
+                style="
+                    background-image: linear-gradient(90deg, #3b82f6, #8b5cf6);
+                    -webkit-background-clip: text;
+                    color: transparent;
+                "
+                >Tanpa Ribet.</span
+            >
+        </h1>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <form method="get" class="position-relative hover-lift">
+                    <input
+                        type="text"
+                        name="q"
+                        class="form-control form-control-lg bg-dark border-secondary text-white ps-5 rounded-pill shadow-lg"
+                        placeholder="Cari layanan..."
+                        value="{{ request.GET.q|default:'' }}"
+                        style="border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.3s;"
+                        onfocus="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 15px rgba(59, 130, 246, 0.3)';"
+                        onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';"
+                    />
+                    <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary"></i>
+                </form>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center gap-2 mt-4 flex-wrap">
+            <a href="/" class="btn btn-sm rounded-pill px-3 transition-btn {% if not selected_cat %}btn-light{% else %}btn-outline-secondary{% endif %}">All</a>
+            <a href="/?cat=OS" class="btn btn-sm rounded-pill px-3 transition-btn {% if selected_cat == 'OS' %}btn-light{% else %}btn-outline-secondary{% endif %}">💻 OS</a>
+            <a href="/?cat=GAME" class="btn btn-sm rounded-pill px-3 transition-btn {% if selected_cat == 'GAME' %}btn-light{% else %}btn-outline-secondary{% endif %}">🎮 Games</a>
+            <a href="/?cat=SOSMED" class="btn btn-sm rounded-pill px-3 transition-btn {% if selected_cat == 'SOSMED' %}btn-light{% else %}btn-outline-secondary{% endif %}">🔥 Sosmed</a>
+        </div>
+    </div>
+
+    <div class="row g-4 py-4">
+        {% for service in services %}
+        <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="{{ forloop.counter|add:'100' }}" 
+        >
+            <div class="hover-card h-100 p-4 d-flex flex-column position-relative overflow-hidden cursor-pointer">
+                <div
+                    class="position-absolute top-0 end-0 p-5 bg-primary opacity-10 rounded-circle blur-xl"
+                    style="transform: translate(30%, -30%); filter: blur(50px); transition: 0.5s;"
+                ></div>
+
+                <div class="mb-4">
+                    <div
+                        class="mb-3 position-relative bg-dark bg-opacity-50 rounded-3 overflow-hidden border border-secondary border-opacity-25"
+                        style="height: 200px"
+                    >
+                        {% if service.image %}
+                        <img
+                            src="{{ service.image.url }}"
+                            alt="{{ service.title }}"
+                            class="w-100 h-100 object-fit-cover"
+                        />
+                        {% else %}
+                        <div class="w-100 h-100 d-flex align-items-center justify-content-center text-primary">
+                            {% if service.category == 'OS' %}<i class="bi bi-windows display-4"></i>
+                            {% elif service.category == 'GAME' %}<i class="bi bi-controller display-4"></i>
+                            {% else %}<i class="bi bi-graph-up-arrow display-4"></i>{% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <h4 class="fw-bold text-white">{{ service.title }}</h4>
+                    <p class="text-secondary small">
+                        {{ service.description|truncatewords:12 }}
+                    </p>
+                </div>
+
+                <div class="mt-auto pt-3 border-top border-secondary border-opacity-10 d-flex justify-content-between align-items-center">
+                    <span class="fw-bold text-primary fs-5">Rp {{ service.price|intcomma }}</span>
+                    <a href="{% url 'service_detail' service.pk %}" class="btn btn-outline-light rounded-circle btn-sm p-2 stretched-link" style="transition: 0.3s;">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center text-muted py-5" data-aos="fade-in">
+            <i class="bi bi-emoji-frown fs-1 d-block mb-3 animate-bounce"></i>
+            Tidak ada layanan ditemukan.
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    /* Custom Animations untuk Index */
+    .animate-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    .delay-4 { animation-delay: 0.8s; }
+
+    @keyframes fadeInUp {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .transition-btn { transition: all 0.3s; }
+    .transition-btn:hover { transform: translateY(-3px); }
+    
+    .hover-lift:hover { transform: translateY(-5px); }
+</style>
+{% endblock %}

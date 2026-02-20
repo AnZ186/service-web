@@ -1,0 +1,96 @@
+/* static/css/custom_admin.css */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+:root {
+    --primary-bg: #0f172a;
+    --secondary-bg: #1e293b;
+    --accent: #6366f1;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --glass: rgba(30, 41, 59, 0.7);
+}
+
+body {
+    font-family: 'Outfit', sans-serif !important;
+    background-color: var(--primary-bg) !important;
+}
+
+/* --- Sidebar & Navbar Mewah --- */
+.main-sidebar, .navbar {
+    background: var(--secondary-bg) !important;
+    border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.brand-link {
+    background: linear-gradient(90deg, #4f46e5, #ec4899) !important;
+    color: white !important;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* --- Card & Content --- */
+.card {
+    background: var(--glass) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.05) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 16px !important;
+}
+
+/* --- Tombol Modern --- */
+.btn-primary, .btn-success, .btn-info {
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3) !important;
+    border: none !important;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5) !important;
+}
+
+/* --- Tabel Transparan --- */
+.table {
+    background: transparent !important;
+    color: var(--text-main) !important;
+}
+.table thead th {
+    background: rgba(0,0,0,0.2) !important;
+    border-bottom: 2px solid var(--accent) !important;
+    color: var(--text-muted) !important;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+.table td {
+    border-color: rgba(255,255,255,0.05) !important;
+}
+
+/* --- Fix Widget Selector Mobile (YANG PENTING INI) --- */
+@media (max-width: 992px) {
+    .selector {
+        display: flex;
+        flex-direction: column;
+        width: 100% !important;
+        float: none !important;
+    }
+    .selector-available, .selector-chosen {
+        width: 100% !important;
+        margin-bottom: 15px;
+    }
+    .selector select {
+        height: 200px !important;
+        background: var(--secondary-bg) !important;
+        color: white !important;
+        border: 1px solid #444 !important;
+    }
+    .selector ul.selector-chooser {
+        transform: rotate(90deg);
+        width: 50px !important;
+        margin: 10px auto !important;
+    }
+}
