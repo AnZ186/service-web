@@ -1,36 +1,6 @@
 # 🚀 Django Project
 
 Halo!  
-Ini adalah project web yang dibuat menggunakan **Django**. Project ini dibuat untuk tugas PKWU.
-
-Struktur project dibuat sederhana supaya mudah dipahami dan gampang dikembangkan lagi ke depannya.
-
----
-
-## ✨ Fitur
-
-- Backend menggunakan **Django**
-- Struktur project rapi dan modular
-- Mendukung **database migration**
-- Tersedia **Django Admin Panel**
-- Mudah dijalankan di environment lokal
-
----
-
-## 🧰 Teknologi yang Digunakan
-
-| Teknologi | Keterangan |
-|---|---|
-| Python | Bahasa pemrograman utama |
-| Django | Web framework backend |
-| SQLite | Database default Django |
-
----
-
-## ⚙️ Cara Menjalankan Project
-# 🚀 Django Project
-
-Halo!  
 Ini adalah project web yang dibuat menggunakan **Django**. Project ini dibuat untuk belajar, eksperimen, dan mengembangkan aplikasi backend menggunakan Python.
 
 Struktur project dibuat sederhana supaya mudah dipahami dan gampang dikembangkan lagi ke depannya.
